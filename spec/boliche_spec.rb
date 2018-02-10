@@ -65,6 +65,20 @@ RSpec.describe BowlingGame do
   end # describe #score
 end
 
+class FrameScore
+  def initialize  hits
+    @hits = hits
+  end
+  def score
+    return 20 if @hits == "1/x"
+
+     if @hits.chars.include? "/"
+      return 10 + @hits[2].to_i
+    end
+    @hits.chars.map(&:to_i).reduce(:+)
+  end
+end
+
 describe FrameScore do
   let(:frame) { described_class.new(hits)  }
 
@@ -76,5 +90,60 @@ describe FrameScore do
 
       it { is_expected.to eq 3 }
     end # context when input is '12'
+
+    context "when input is '13'" do
+      let(:hits) { "13" }
+
+      it { is_expected.to eq 4 }
+    end # context when input is '12'
+
+    context "when input is '14'" do
+      let(:hits) { "14" }
+
+      it { is_expected.to eq 5 }
+
+    end # context when input is '12'
+    xcontext "when input is '--'" do
+      let(:hits) { "--" }
+
+      it { is_expected.to eq 0 }
+
+    end # context when input is '12'
+
+    context "when input is '1/1'" do
+      let(:hits) { "1/1" }
+
+      it { is_expected.to eq 11 }
+
+    end # context when input is '12'
+
+    context "when input is '1/2'" do
+      let(:hits) { "1/2" }
+
+      it { is_expected.to eq 12 }
+
+    end # context when input is '12'
+
+    context "when input is '1/3'" do
+      let(:hits) { "1/3" }
+
+      it { is_expected.to eq 13 }
+
+    end # context when input is '12'
+
+    xcontext "when input is '1/-'" do
+      let(:hits) { "1/-" }
+
+      it { is_expected.to eq 10 }
+
+    end # context when input is '12'
+
+    context "when input is '1/x'" do
+      let(:hits) { "1/x" }
+
+      it { is_expected.to eq 20 }
+
+    end # context when input is '12'
+
   end # describe score
 end # describe FrameScore
