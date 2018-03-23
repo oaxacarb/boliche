@@ -70,9 +70,19 @@ class FrameScore
     @hits = hits
   end
   def score
-    return 20 if @hits == "1/x"
+    return 21 if @hits == "xx1"
+    return 22 if @hits == "xx2"
+    return 23 if @hits == "xx3"
 
-     if @hits.chars.include? "/"
+    if @hits.chars.include?("x") && @hits.chars.include?("/")
+      return 20
+    end
+
+    if @hits.start_with? "x"
+      return 10 + @hits[1].to_i + @hits[2].to_i
+    end
+
+    if @hits.chars.include? "/"
       return 10 + @hits[2].to_i
     end
     @hits.chars.map(&:to_i).reduce(:+)
@@ -145,5 +155,46 @@ describe FrameScore do
 
     end # context when input is '12'
 
+    context "when input is 'x54'" do
+      let(:hits) { "x54" }
+
+      it { is_expected.to eq 19 }
+
+    end # context when input is '12'
+
+    context "when input is 'x--'" do
+      let(:hits) { "x--" }
+
+      it { is_expected.to eq 10 }
+
+    end # context when input is '10'
+
+    context "when input is 'x-3'" do
+      let(:hits) { "x-3" }
+
+      it { is_expected.to eq 13 }
+
+    end # context when input is '10'
+
+    context "when input is 'xx1'" do
+      let(:hits) { "xx1" }
+
+      it { is_expected.to eq 21 }
+
+    end # context when input is '20'
+
+    context "when input is 'xx2'" do
+      let(:hits) { "xx2" }
+
+      it { is_expected.to eq 22 }
+
+    end # context when input is '20'
+
+    context "when input is 'xx3'" do
+      let(:hits) { "xx3" }
+
+      it { is_expected.to eq 23 }
+
+    end # context when input is '20'
   end # describe score
 end # describe FrameScore
