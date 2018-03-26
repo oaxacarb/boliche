@@ -119,6 +119,6 @@ describe FrameScore do
 
       it { is_expected.to eq 30 }
 
-    end # context when input is '20'
+    end # context when input is '30'
   end # describe score
 end # describe FrameScore
