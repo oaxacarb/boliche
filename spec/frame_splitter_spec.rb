@@ -30,4 +30,85 @@ describe FrameSplitter do
       expect(splitter.frames).to eq expected
     end
   end
+
+  context "when the input is '1/145123451234512345'" do
+    let(:input) { '1/145123451234512345' }
+
+    it "split frames correctly" do
+      expected = ["1/1", "14", "51", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '1/135123451234512345'" do
+    let(:input) { '1/135123451234512345' }
+
+    it "split frames correctly" do
+      expected = ["1/1", "13", "51", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '1/125123451234512345'" do
+    let(:input) { '1/125123451234512345' }
+
+    it "split frames correctly" do
+      expected = ["1/1", "12", "51", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '251/1123451234512345'" do
+    let(:input) { '251/1123451234512345' }
+
+    it "split frames correctly" do
+      expected = ["25", "1/1", "11", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '251/1323451234512345'" do
+    let(:input) { '251/1323451234512345' }
+
+    it "split frames correctly" do
+      expected = ["25", "1/1", "13", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '25113/23451234512345'" do
+    let(:input) { '25113/23451234512345' }
+
+    it "split frames correctly" do
+      expected = ["25", "11", "3/2", "23", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '25113/21451234512345'" do
+    let(:input) { '25113/21451234512345' }
+
+    it "split frames correctly" do
+      expected = ["25", "11", "3/2", "21", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
+  context "when the input is '25113/27451234512345'" do
+    let(:input) { '25113/27451234512345' }
+
+    it "split frames correctly" do
+      expected = ["25", "11", "3/2", "27", "45", "12", "34", "51", "23", "45"]
+      splitter = FrameSplitter.new(input)
+      expect(splitter.frames).to eq expected
+    end
+  end
+
 end
